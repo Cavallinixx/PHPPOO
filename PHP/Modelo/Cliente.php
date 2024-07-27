@@ -1,50 +1,34 @@
 <?php
     namespace PHP\Modelo;
+    require_once('Endereco.php');
 
-    class Cliente(){
-        private string $cpf;
-        private string $telefone;
-        private string $endereco;
-        private date $dataNasc;
-        private int $totalCompras;
+    class Cliente extends Pessoa{
+        protected string $dataNasc;
+        protected float $totalCompras;
 
-        public function __construct(string $cpf, string $telefone, string $endereco, date $dataNasc, int $totalCompras){
-            $this->cpf = $cpf;
-            $this->telefone = $telefone; 
-            $this->endereco = $endereco;
-            $this->cargo = $cargo;
+        public function __construct(string $cpf, string $nome, string $telefone, Endereco $endereco, string $dataNasc, int $totalCompras){
+            parent::__construct($cpf,$nome, $telefone,$endereco);
             $this->dataNasc = $dataNasc;
             $this->totalCompras = $totalCompras;
+        } //INICIO DO GET
 
-            //INICIO DO GET
-        public function getCpf():string 
-        {
-            return $this->cpf;
-        }//fim do getMatricula
+        public function __get(string $nome){
+            return $this->nome;
+        }
 
-        public function getTelefone():string 
-        {
-            return $this->telefone;
-        }//fim do getNome
+        public function __set(string $campo, string $valor):void{
+            $this->campo = $valor;
+        }//fim do set
 
-        public function getEndereco():string  
+        public function imprimir():string
         {
-            return $this->salario;
-        }//fim do getSalario
+            return parent::imprimir().
+                    "<br>Data de Nascimento: ".$this->dataNasc.
+                    "<br>Total de Compras: ".$this->totalCompras;
+        }//fim do imprimir
 
-        public function getDataNasc():date 
-        {
-            return $this->dataNasc;
-        }//fim do getCargo
 
-        public function getTotalCompras():int 
-        {
-            return $this->totalCompras;
-        }//fim do getEndereco
 
         
-
-
-        }//fim do construct
     }//fim metodo cliente
 ?>
